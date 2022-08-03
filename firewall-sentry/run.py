@@ -16,6 +16,7 @@ def ip():
 
     if request.method == 'GET':
         if 'FS_TOKEN' in request.headers and request.headers['FS_TOKEN'] == sentry.get_token():
+            print('FS_TOKEN provided by {} is correct, returning list'.format(request.remote_addr))
             return sentry.list()
 
     elif request.method == 'POST':
