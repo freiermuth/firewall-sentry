@@ -15,6 +15,7 @@ def firewall_manager():
     blank = ''
     print(request.headers)
     if request.method == 'GET':
+        print(F"Sentry Token: {sentry.get_token()}; Provided headers{request.headers}")
         if 'FS_TOKEN' in request.headers and request.headers['FS_TOKEN'] == sentry.get_token():
             print('FS_TOKEN provided by {} is correct, returning list'.format(request.remote_addr))
             return sentry.list()
