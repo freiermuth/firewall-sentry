@@ -20,7 +20,6 @@ def firewall_manager():
             return sentry.list()
 
     elif request.method == "POST":
-        print(request.headers)
         if "FS-TOKEN" in request.headers and request.headers["FS-TOKEN"] == sentry.get_token():
             if 'FS-HOST' in request.headers:
                 sentry.update(request.headers["FS-HOST"], request.headers["X-Forwarded-For"])
