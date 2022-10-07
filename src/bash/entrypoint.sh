@@ -10,5 +10,5 @@ if [[ $RUNTYPE == 'CRON' ]]; then
 else
   echo 'RUNNING APP IN NORMAL MODE'
   nginx && \
-  gunicorn --access-logfile "-" --error-logfile "-" -w 3 wsgi:app
+  gunicorn --access-logfile "-" --error-logfile "-" -w 1 wsgi:app
 fi

@@ -1,0 +1,20 @@
+services:
+  reverse-proxy:
+    image: traefik:v2.9
+    command: --api.insecure=true --providers.docker
+    ports:
+      # The HTTP port
+      - "80:80"
+      # The Web UI (enabled by --api.insecure=true)
+      - "8080:8080"
+    volumes:
+      # So that Traefik can listen to the Docker events
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+  sentry:
+    image: "freiermuthj/firewall-sentry:latest"
+    environment:
+      - "TOKEN=xyz"
+    labels:
+      - "traefik.http.routers.sentry.rule=Host(`sentry.docker.localhost`)"
+    restart: unless-stopped
